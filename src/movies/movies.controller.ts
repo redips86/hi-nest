@@ -12,8 +12,7 @@ import { Movie } from './entities/movie.entity';
 
 @Controller('movies')
 export class MoviesController {
-  constructor(private readonly moviesService: MoviesService) {
-  }
+  constructor(private readonly moviesService: MoviesService) {}
 
   @Get()
   getAll(): Movie[] {
@@ -37,9 +36,6 @@ export class MoviesController {
 
   @Patch('/:id')
   patch(@Param('id') movieId: string, @Body() updateData) {
-    return {
-      movieId,
-      ...updateData,
-    };
+    return this.moviesService.update(movieId, updateData);
   }
 }
